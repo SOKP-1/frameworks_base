@@ -149,4 +149,7 @@
     <string name="pie_phone_status_airplane_mode">Airplane mode on</string>
     <string name="pie_phone_status_emergency_only">Emergency calls only</string>
 
+    <!-- Power menu -->
+    <string name="quick_settings_powermenu_label">Power Menu</string> 
+
 </resources>
