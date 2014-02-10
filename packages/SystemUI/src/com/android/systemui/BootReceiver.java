@@ -121,6 +121,11 @@ public class BootReceiver extends BroadcastReceiver {
                 context.startService(loadavg);
             }
 
+            // start the power saver service if activated
+            if (Settings.System.getInt(res, Settings.System.POWER_SAVER_ENABLED, 0) != 0) {
+                Intent powersaver = new Intent(context, com.android.systemui.powersaver.PowerSaverService.class);
+                context.startService(powersaver);
+            }
             // start the screen state service if activated
             if (Settings.System.getBoolean(res, Settings.System.START_SCREEN_STATE_SERVICE, false)) {
                 Intent screenstate = new Intent(context, com.android.systemui.screenstate.ScreenStateService.class);
