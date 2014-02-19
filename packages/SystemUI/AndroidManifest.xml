@@ -139,6 +139,10 @@
                <android name="android.intent.action.SCREEN_STATE_SERVICE_UPDATE"/>
             </intent-filter>
         </service>
+        <service android:name=".batterysaver.BatterySaverService" />
+
+        <service android:name=".CPUInfoService"
+                android:exported="true" />
 
         <service android:name=".ImageWallpaper"
                 android:permission="android.permission.BIND_WALLPAPER"
