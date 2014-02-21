@@ -55,7 +55,7 @@ wn on the screen). [CHAR LIMIT=NONE] -->
     <string name="quick_settings_battery_saver_label">Battery saver on</string>
     <string name="quick_settings_battery_saver_off_label">Battery saver off</string>
 
-   <!-- battery saver mode -->
+    <!-- battery saver mode -->
     <string name="battery_saver_start">Battery Saver Enabled</string>
     <string name="battery_saver_stop">Battery Saver Disabled</string>
     <string name="battery_saver_change">Battery Saver Change network to</string>
@@ -99,5 +99,6 @@ wn on the screen). [CHAR LIMIT=NONE] -->
     <string name="status_bar_floating_no_interface">App provides no interface</string>
     <string name="battery_saver_wifi">Wifi restored</string>
     <string name="battery_saver_all">All configuration restored</string>
-
+    <string name="battery_saver_data">Mobile data restored</string>
+    <string name="battery_saver_no_changes">No configuration restored</string>
 </resources>
