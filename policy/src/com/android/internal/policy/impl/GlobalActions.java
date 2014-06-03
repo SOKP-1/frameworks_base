@@ -57,6 +57,7 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
+import android.service.gesture.IEdgeGestureService;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
@@ -112,6 +113,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private Context mUiContext;
     private final AudioManager mAudioManager;
     private final IDreamManager mDreamManager;
+    private IEdgeGestureService mEdgeGestureService;
+    private Object mServiceAquireLock = new Object();
 
     private ArrayList<Action> mItems;
     private GlobalActionsDialog mDialog;
@@ -762,6 +765,15 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     }
 
     private void prepareDialog() {
+        // Global menu is showing. Notify EdgeGestureService.
+        IEdgeGestureService edgeGestureService = getEdgeGestureService();
+        try {
+            if (edgeGestureService != null) {
+                edgeGestureService.setOverwriteImeIsActive(true);
+            }
+        } catch (RemoteException e) {
+             mEdgeGestureService = null;
+        }
         refreshSilentMode();
         mAirplaneModeOn.updateState(mAirplaneState);
         mAdapter.notifyDataSetChanged();
@@ -793,6 +805,15 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 // ignore this
                 Log.w(TAG, ie);
             }
+        }
+        // Global menu dismiss. Notify EdgeGestureService.
+        IEdgeGestureService edgeGestureService = getEdgeGestureService();
+        try {
+            if (edgeGestureService != null) {
+                edgeGestureService.setOverwriteImeIsActive(false);
+            }
+        } catch (RemoteException e) {
+             mEdgeGestureService = null;
         }
     }
 
@@ -1374,6 +1395,19 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         try {
             mContext.startActivityAsUser(intent,UserHandle.CURRENT);
         } catch (ActivityNotFoundException e) {
+        }
+    }
+
+    /**
+     * If not set till now get EdgeGestureService.
+     */
+    private IEdgeGestureService getEdgeGestureService() {
+        synchronized (mServiceAquireLock) {
+            if (mEdgeGestureService == null) {
+                mEdgeGestureService = IEdgeGestureService.Stub.asInterface(
+                            ServiceManager.getService("edgegestureservice"));
+            }
+            return mEdgeGestureService;
         }
     }
 
