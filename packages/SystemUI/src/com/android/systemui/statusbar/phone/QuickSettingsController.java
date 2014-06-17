@@ -56,6 +56,7 @@ import static com.android.internal.util.cm.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.cm.QSConstants.TILE_WIMAX;
 import static com.android.internal.util.cm.QSConstants.TILE_POWER;
 import static com.android.internal.util.cm.QSConstants.TILE_THEME;
+import static com.android.internal.util.cm.QSConstants.TILE_APPCIRCLEBAR;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -119,6 +120,7 @@ import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.PowerMenuTile;
 import com.android.systemui.quicksettings.OnTheGoTile;
+import com.android.systemui.quicksettings.AppcirclebarTile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -316,6 +318,8 @@ public class QuickSettingsController {
             } else if (tile.contains(TILE_CPUFREQ)) {
                 if (cpufreqSupported) {
                     qs = new CPUFreqTile(mContext, this);
+            } else if (tile.equals(TILE_APPCIRCLEBAR)) {
+                qs = new AppcirclebarTile(mContext, this);
                 }
             }
 
