@@ -87,7 +87,7 @@ public class PlatLogoActivity extends Activity {
         final TextView letter = new TextView(this);
 
         letter.setTypeface(bold);
-        letter.setTextSize(mIsCM ? 120 : 270);
+        letter.setTextSize(mIsCM ? 115 : 270);
         letter.setTextColor(0xFFFFFFFF);
         letter.setGravity(Gravity.CENTER);
         letter.setText(mIsCM ? "SOKP" : "K");
