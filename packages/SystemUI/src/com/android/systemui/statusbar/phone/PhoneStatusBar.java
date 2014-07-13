@@ -1056,7 +1056,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mReminderEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
                     Settings.System.REMINDER_ALERT_ENABLED, 0, UserHandle.USER_CURRENT) != 0;
 
-        mWeatherEnabled = Settings.AOKP.getBoolean(mContext.getContentResolver(),
+        mWeatherEnabled = Settings.System.getBoolean(mContext.getContentResolver(),
                     Settings.System.SYSTEMUI_WEATHER_HEADER_VIEW, false);
 
         View view = View.inflate(mContext, R.layout.reminder_entry, null);
@@ -4022,7 +4022,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mDoubleTapToSleep = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.DOUBLE_TAP_SLEEP_GESTURE, 0) == 1;
 
-        boolean weatherHolder = Settings.AOKP.getBoolean(cr,
+        boolean weatherHolder = Settings.System.getBoolean(resolver,
                 Settings.System.SYSTEMUI_WEATHER_HEADER_VIEW, false);
         if (weatherHolder != mWeatherEnabled) {
             mWeatherEnabled = weatherHolder;

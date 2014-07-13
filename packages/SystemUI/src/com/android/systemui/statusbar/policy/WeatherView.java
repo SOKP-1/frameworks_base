@@ -64,7 +64,7 @@ public class WeatherView extends TextView implements WeatherListener {
 		@Override
 		public void onChange(boolean selfChange) {
 			ContentResolver resolver = mContext.getContentResolver();
-			mViewEnabled = Settings.AOKP.getBoolean(resolver,
+			mViewEnabled = Settings.System.getBoolean(resolver,
 					Settings.System.SYSTEMUI_WEATHER_HEADER_VIEW, false);
 			updateVisibility();
 		}
